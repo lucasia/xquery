@@ -3,16 +3,15 @@ module namespace trade = "http://lucasia.com/xquery/reference/trade";
 import module namespace format = "http://lucasia.com/xquery/reference/formatting" at "formatting.xqy";
 import module namespace party = "http://lucasia.com/xquery/reference/party" at "party.xqy";
 
-declare function trade:transform($tradeXML as element(trade), $partyXML as element(party)*) 
-as element(tr)
+declare function trade:transform($trades as element(trade)*, $parties as element(party)*) 
+as element(tr)*
 {
+    for $trade in $trades
 
-    let $industry := party:find-industry(data($tradeXML/party), $partyXML)
+        let $elements as element()* := (trade:create-selectivity-nodes($trade), 
+                                        trade:create-industry-node($trade, $parties))
     
-    let $elements as element()* := (trade:create-selectivity-nodes($tradeXML), party:create-industry-node($industry))
-    
-    return format:tabular-row($elements)
-                    
+        return format:tabular-row($elements)                    
 };
 
 
@@ -22,6 +21,14 @@ as element()*
     (
         <ticket>{data($tradeXML/ticket)}</ticket>,
         <party>{data($tradeXML/party)}</party>
-    )
-                    
+    )                  
+};
+
+declare function trade:create-industry-node($tradeXML as element(trade), $partyXML as element(party)*) 
+as element()
+{
+
+ let $industry as xs:string? := party:find-industry(data($tradeXML/party), $partyXML)
+ 
+ return <industry>{party:find-industry($tradeXML/party, $partyXML)}</industry>                 
 };

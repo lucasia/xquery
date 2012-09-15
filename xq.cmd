@@ -1,1 +1,1 @@
-java -cp lib/saxon9he.jar net.sf.saxon.Query functions/message-business-logic-test.xqy
+java -cp lib/saxon9he.jar net.sf.saxon.Query src/test/xquery/functions/message-business-logic-test.xqy

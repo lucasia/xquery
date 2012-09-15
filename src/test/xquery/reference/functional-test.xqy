@@ -6,19 +6,19 @@ import module namespace xq = "http://marklogic.com/xqunit" at "../lib/xqunit.xqy
 
 declare function local:functional-test() 
 {
-    let $ticket as xs:string := "Ticket-1"
-    let $party as xs:string := "UBS"
-    let $industry as xs:string := "Finance"    
+    let $ticket as xs:string := "1"
+    let $partyName as xs:string := "UBS"
+    let $industryName as xs:string := "Finance"    
 
-    let $partyXML := <parties>{xml-factory:create-party($party, $industry)}</parties>
+    let $parties as element(parties) := <parties>{xml-factory:create-party($partyName, $industryName)}</parties>
                     
-   let $expected := <tr>
-                        <td name="ticket">{$ticket}</td>
-                        <td name="party">{$party}</td>
-                        <td name="industry">{$industry}</td>
-                    </tr>
+    let $expected as element(tr) := <tr>
+                                        <td name="ticket">{$ticket}</td>
+                                        <td name="party">{$partyName}</td>
+                                        <td name="industry">{$industryName}</td>
+                                    </tr>
                     
-   let $actual := trade:transform(xml-factory:create-trade($ticket, $party), $partyXML/party)                 
+   let $actual as element(tr)* := trade:transform(xml-factory:create-trade($ticket, $partyName), $parties/party)                 
 
    return xq:assert-equal("test", $actual, $expected)
 };
@@ -26,16 +26,38 @@ declare function local:functional-test()
 declare function local:functional-test-missing-industry-lookup() 
 {
 
-    let $ticket as xs:string := "Ticket-1"
-    let $party as xs:string := "UBS"
+    let $ticket as xs:string := "1"
+    let $partyName as xs:string := "UBS"
 
-    let $expected := <tr>
-                        <td name="ticket">{$ticket}</td>
-                        <td name="party">{$party}</td>
-                        <td name="industry"></td>
-                    </tr>
+    let $expected as element(tr) :=  <tr>
+                                        <td name="ticket">{$ticket}</td>
+                                        <td name="party">{$partyName}</td>
+                                        <td name="industry"/>
+                                    </tr>
                     
-   let $actual := trade:transform(xml-factory:create-trade($ticket, $party), ())   
+                    
+   let $actual as element(tr)* := trade:transform(xml-factory:create-trade($ticket, $partyName), ())   
+
+   return xq:assert-equal("test", $actual, $expected)
+};
+
+declare function local:functional-test-multiple-trades() 
+{
+    let $trades as element(trade)+ := (xml-factory:create-trade("1", "UBS"), xml-factory:create-trade("2", "HSBC")) 
+
+    let $expected as element(tr)+ :=
+                    (<tr>
+                        <td name="ticket">1</td>
+                        <td name="party">UBS</td>
+                        <td name="industry"></td>
+                    </tr>,
+                    <tr>
+                        <td name="ticket">2</td>
+                        <td name="party">HSBC</td>
+                        <td name="industry"></td>
+                    </tr>)
+                    
+   let $actual as element(tr)* := trade:transform($trades, ())   
 
    return xq:assert-equal("test", $actual, $expected)
 };
@@ -43,6 +65,7 @@ declare function local:functional-test-missing-industry-lookup()
 <results> 
 {   
     local:functional-test(),
-    local:functional-test-missing-industry-lookup()
+    local:functional-test-missing-industry-lookup(),
+    local:functional-test-multiple-trades()
 }
 </results>

@@ -7,6 +7,5 @@ as element(tr)
         for $element in $elements
         return <td name="{fn:name($element)}">{fn:data($element)}</td>
         }
-   </tr>
-               
+   </tr>              
 };
