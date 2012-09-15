@@ -1,0 +1,7 @@
+<message>
+    <id>1</id>
+    <trades>
+        <trade ticket="1" shares="1" price="1.00" currency="USD"/>
+        <trade ticket="2" shares="2" price="2.00" currency="USD"/>
+    </trades>
+</message>

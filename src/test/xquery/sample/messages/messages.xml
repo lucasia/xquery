@@ -1,0 +1,25 @@
+<messages>
+    <message>
+        <id>1</id>
+        <trades>
+            <trade ticket="1" ticker="ACME" shares="1" price="1.00" currency="USD" trade-date="2012-April-01"/>
+            <trade ticket="2" ticker="FOO" shares="2" price="2.00" currency="GBP"  trade-date="2012-April-01"/>
+        </trades>
+    </message>
+    
+    <message>
+        <id>2</id>
+        <trades>
+            <trade ticket="3" ticker="JOE" shares="1" price="1.00" currency="USD"  trade-date="2012-April-01"/>
+            <trade ticket="4" ticker="BAR" shares="2" price="2.00" currency="USD"  trade-date="2012-April-01"/>
+        </trades>
+    </message>
+    
+    <message>
+        <id>3</id>
+        <trades>
+            <trade ticket="5" ticker="BAR" shares="1" price="1.00" currency="USD"  trade-date="2012-April-01"/>
+            <trade ticket="6" ticker="FOO" shares="2" price="2.00" currency="GBP"  trade-date="2012-April-01"/>
+        </trades>
+    </message>
+</messages>
