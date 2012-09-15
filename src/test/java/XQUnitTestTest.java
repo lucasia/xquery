@@ -10,13 +10,16 @@ import java.io.PrintStream;
  * Test to ensure the XQuery unit test works as expected
  */
 public class XQUnitTestTest {
-
-
     @Test
     public void sampleTestSuite() throws Exception {
         testXQuery("src/test/xquery/sample/message-business-logic-test.xqy");
     }
-
+    
+    @Test
+    public void referenceTradeTestSuite() throws Exception {
+        testXQuery("src/test/xquery/reference/trade-test.xqy");
+    }
+    
     @Test
     public void referenceFunctionalTestSuite() throws Exception {
         testXQuery("src/test/xquery/reference/functional-test.xqy");

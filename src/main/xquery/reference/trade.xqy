@@ -24,11 +24,11 @@ as element()*
     )                  
 };
 
-declare function trade:create-industry-node($tradeXML as element(trade), $partyXML as element(party)*) 
+declare function trade:create-industry-node($trade as element(trade), $parties as element(party)*) 
 as element()
 {
 
- let $industry as xs:string? := party:find-industry(data($tradeXML/party), $partyXML)
+ let $industry as xs:string? := party:find-industry(data($trade/party), $parties)
  
- return <industry>{party:find-industry($tradeXML/party, $partyXML)}</industry>                 
+ return <industry>{$industry}</industry>                 
 };

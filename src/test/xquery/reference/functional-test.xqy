@@ -20,7 +20,7 @@ declare function local:functional-test()
                     
    let $actual as element(tr)* := trade:transform(xml-factory:create-trade($ticket, $partyName), $parties/party)                 
 
-   return xq:assert-equal("test", $actual, $expected)
+   return xq:assert-equal("functional-test()", $actual, $expected)
 };
 
 declare function local:functional-test-missing-industry-lookup() 
@@ -38,7 +38,7 @@ declare function local:functional-test-missing-industry-lookup()
                     
    let $actual as element(tr)* := trade:transform(xml-factory:create-trade($ticket, $partyName), ())   
 
-   return xq:assert-equal("test", $actual, $expected)
+   return xq:assert-equal("functional-test-missing-industry-lookup()", $actual, $expected)
 };
 
 declare function local:functional-test-multiple-trades() 
@@ -59,7 +59,7 @@ declare function local:functional-test-multiple-trades()
                     
    let $actual as element(tr)* := trade:transform($trades, ())   
 
-   return xq:assert-equal("test", $actual, $expected)
+   return xq:assert-equal("functional-test-multiple-trades()", $actual, $expected)
 };
 
 <results> 
