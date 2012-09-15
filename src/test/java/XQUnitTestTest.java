@@ -13,15 +13,23 @@ public class XQUnitTestTest {
 
 
     @Test
-    public void testBusinessLogic() throws Exception {
+    public void sampleTestSuite() throws Exception {
+        testXQuery("src/test/xquery/sample/message-business-logic-test.xqy");
+    }
 
-        String results = execute("src/test/xquery/sample/message-business-logic-test.xqy");
+    @Test
+    public void referenceFunctionalTestSuite() throws Exception {
+        testXQuery("src/test/xquery/reference/functional-test.xqy");
+    }
+
+    public void testXQuery(final String xQueryTestPath) throws Exception {
+
+        String results = execute(xQueryTestPath);
 
         Assert.assertTrue(results.contains("pass")); // ensure at least once success
         Assert.assertFalse(results.contains("fail")); // ensure no failures
-
     }
-
+    
 
     public String execute(String xQueryPath) throws Exception {
 
