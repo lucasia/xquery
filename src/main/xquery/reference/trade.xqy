@@ -15,19 +15,18 @@ as element(tr)*
 };
 
 
-declare function trade:create-selectivity-nodes($tradeXML as element(trade)) 
+declare function trade:create-selectivity-nodes($trade as element(trade)) 
 as element()*
 {
     (
         <ticket>{data($tradeXML/ticket)}</ticket>,
-        <party>{data($tradeXML/party)}</party>
+        <party>{data($trade/party)}</party>
     )                  
 };
 
 declare function trade:create-industry-node($trade as element(trade), $parties as element(party)*) 
 as element()
 {
-
  let $industry as xs:string? := party:find-industry(data($trade/party), $parties)
  
  return <industry>{$industry}</industry>                 
