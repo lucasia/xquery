@@ -10,6 +10,81 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
+                                    <String>src/test/xquery/reference/format-test.xqy</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>xq-current-file</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XQUERY</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/xquery/reference/conform-test.xqy</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>xq-current-file</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XQUERY</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/xquery/reference/functional-test.xqy</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>xq-current-file</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XQUERY</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/xquery/reference/trade-test.xqy</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>xq-current-file</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XQUERY</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/xquery/reference/formatting-test.xqy</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>xq-current-file</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XQUERY</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
                                     <String>src/main/xquery/reference/example.xqy</String>
                                 </field>
                                 <field name="scenarioIds">

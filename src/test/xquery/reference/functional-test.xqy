@@ -1,4 +1,4 @@
-import module namespace trade = "http://lucasia.com/xquery/reference/trade" at "../../../main/xquery/reference/trade.xqy";
+import module namespace report = "http://lucasia.com/xquery/reference/report" at "../../../main/xquery/reference/report.xqy";
 
 import module namespace xml-factory = "http://lucasia.com/xquery/reference/test/xml-factory" at "xml-factory.xqy";
 
@@ -18,7 +18,7 @@ declare function local:functional-test()
                                         <td name="industry">{$industryName}</td>
                                     </tr>
                     
-   let $actual as element(tr)* := trade:transform(xml-factory:create-trade($ticket, $partyName), $parties/party)                 
+   let $actual as element(tr)* := report:gen-transaction-report(xml-factory:create-trade($ticket, $partyName), $parties/party)                 
 
    return xq:assert-equal("functional-test()", $actual, $expected)
 };
@@ -36,7 +36,7 @@ declare function local:functional-test-missing-industry-lookup()
                                     </tr>
                     
                     
-   let $actual as element(tr)* := trade:transform(xml-factory:create-trade($ticket, $partyName), ())   
+   let $actual as element(tr)* := report:gen-transaction-report(xml-factory:create-trade($ticket, $partyName), ())   
 
    return xq:assert-equal("functional-test-missing-industry-lookup()", $actual, $expected)
 };
@@ -57,7 +57,7 @@ declare function local:functional-test-multiple-trades()
                         <td name="industry"></td>
                     </tr>)
                     
-   let $actual as element(tr)* := trade:transform($trades, ())   
+   let $actual as element(tr)* := report:gen-transaction-report($trades, ())   
 
    return xq:assert-equal("functional-test-multiple-trades()", $actual, $expected)
 };

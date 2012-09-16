@@ -16,8 +16,13 @@ public class XQUnitTestTest {
     }
     
     @Test
-    public void referenceTradeTestSuite() throws Exception {
-        testXQuery("src/test/xquery/reference/trade-test.xqy");
+    public void referenceConformTestSuite() throws Exception {
+        testXQuery("src/test/xquery/reference/conform-test.xqy");
+    }
+    
+    @Test
+    public void referenceFormatTestSuite() throws Exception {
+        testXQuery("src/test/xquery/reference/format-test.xqy");
     }
     
     @Test
