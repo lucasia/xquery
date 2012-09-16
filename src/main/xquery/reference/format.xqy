@@ -1,6 +1,6 @@
 module namespace format = "http://lucasia.com/xquery/reference/format";
 
-(: method expects data structured with one descendent :)
+(: flattens all children under the element :)
 declare function format:tabular($elements as element()*) 
 as element(tr)*
 {

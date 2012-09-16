@@ -4,27 +4,32 @@ import module namespace xml-factory = "http://lucasia.com/xquery/reference/test/
 
 import module namespace xq = "http://marklogic.com/xqunit" at "../lib/xqunit.xqy";
 
-declare function local:conform-economic-terms-test() 
+declare function local:test-conform-economic-terms() 
 {
     let $ticket as xs:string := "1"
     let $partyName as xs:string := "UBS"
+    let $currency as xs:string := "JPY"
+    let $amount as xs:decimal :=  123.45
 
-    let $expected as element()+ := (<ticket>{$ticket}</ticket>, <party>{$partyName}</party>)
+    let $trade as element(trade-raw) := xml-factory:create-trade($ticket, $partyName, $currency, $amount)
+    
+    let $expected as element()+ := (<ticket>{$ticket}</ticket>, <party>{$partyName}</party>, 
+                                    <currency>{$currency}</currency>, <amount>{$amount}</amount>)
                     
-    let $actual as element()* := conform:conform-economic-terms(xml-factory:create-trade($ticket, $partyName))                 
+    let $actual as element()* := conform:conform-economic-terms($trade)                 
 
     return xq:assert-equal("create-selectivity-nodes-test()", $actual, $expected)
 };
 
-declare function local:conform-industry-test() 
+declare function local:test-conform-industry() 
 {
     let $ticket as xs:string := "1"
     let $partyName as xs:string := "UBS"
     let $industryName as xs:string := "Finance"    
 
-    let $party as element(party) := xml-factory:create-party($partyName, $industryName)
+    let $party as element(party-raw) := xml-factory:create-party($partyName, $industryName)
     
-    let $trade as element(trade) := xml-factory:create-trade($ticket, $partyName)
+    let $trade as element(trade-raw) := xml-factory:create-trade($ticket, $partyName)
                      
 
    return (
@@ -36,7 +41,7 @@ declare function local:conform-industry-test()
 
 <results> 
 {   
-    local:conform-economic-terms-test() ,
-    local:conform-industry-test() 
+    local:test-conform-economic-terms(),
+    local:test-conform-industry() 
 }
 </results>

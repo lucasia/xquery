@@ -4,7 +4,7 @@ import module namespace xml-factory = "http://lucasia.com/xquery/reference/test/
 
 import module namespace xq = "http://marklogic.com/xqunit" at "../lib/xqunit.xqy";
 
-declare function local:tabular-row-test() 
+declare function local:test-tabular-row() 
 {
     let $input := (<first>joe</first>, <last>smith</last>)
     
@@ -15,7 +15,7 @@ declare function local:tabular-row-test()
     return xq:assert-equal("create-selectivity-nodes-test()", $actual, $expected)
 };
 
-declare function local:tabular-test() 
+declare function local:test-tabular() 
 {
     let $input := <person><first>joe</first><last>smith</last></person>
     
@@ -28,7 +28,7 @@ declare function local:tabular-test()
 
 <results> 
 {   
-    local:tabular-row-test(),
-    local:tabular-test() 
+    local:test-tabular-row(),
+    local:test-tabular()
 }
 </results>
