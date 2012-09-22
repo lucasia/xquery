@@ -39,11 +39,10 @@ public class XQueryFlattener {
         // namespaces at the top
         for (QName namespace : getNamespaces(staticContext)) {
             buffer.append("declare namespace ");
-            buffer.append(namespace.getLocalPart()).append(" = ");
+            buffer.append(namespace.getPrefix()).append(" = ");
             buffer.append("\"").append(namespace.getNamespaceURI()).append("\";");
             buffer.append("\n");
         }
-        buffer.append("\n");
 
         // module content
         XQueryFunctionLibrary functionLibrary = staticContext.getGlobalFunctionLibrary();
@@ -63,12 +62,12 @@ public class XQueryFlattener {
         Set<QName> namespaces = new HashSet<QName>();
 
         while (prefixIterator.hasNext()) {
-            String localPart = prefixIterator.next();
-            String uri = resolver.getURIForPrefix(localPart, false);
+            String prefix = prefixIterator.next();
+            String uri = resolver.getURIForPrefix(prefix, false);
 
             // not allowed to specify xml prefix
-            if (!"xml".equals(localPart)) {
-                namespaces.add(new QName(uri, localPart));
+            if (!"xml".equals(prefix)) {
+                namespaces.add(new QName(uri, "", prefix));
             }
         }
 
