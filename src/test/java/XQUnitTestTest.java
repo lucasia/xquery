@@ -28,13 +28,6 @@ public class XQUnitTestTest {
         testXQuery("src/test/xquery/reference/functional-test.xqy");
     }
 
-    @Test
-    public void testHelloWorld() throws Exception {
-        String results = new XQuery().execute("src/test/xquery/sample/hello-world.xqy");
-
-        System.out.println("results = " + results);
-    }
-
 
     public void testXQuery(final String xQueryTestPath) throws Exception {
 

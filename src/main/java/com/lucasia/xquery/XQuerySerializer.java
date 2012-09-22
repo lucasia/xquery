@@ -1,12 +1,10 @@
 package com.lucasia.xquery;
 
 import net.sf.saxon.expr.Expression;
-import net.sf.saxon.expr.StaticContext;
 import net.sf.saxon.expr.instruct.FixedElement;
+import net.sf.saxon.expr.instruct.SimpleNodeConstructor;
 import net.sf.saxon.expr.instruct.UserFunctionParameter;
-import net.sf.saxon.om.NamespaceBinding;
 import net.sf.saxon.om.NamespaceResolver;
-import net.sf.saxon.om.NodeName;
 import net.sf.saxon.query.QueryModule;
 import net.sf.saxon.query.XQueryExpression;
 import net.sf.saxon.query.XQueryFunction;
@@ -53,6 +51,7 @@ public class XQuerySerializer {
         // main method
         buffer.append("\n");
         buffer.append(expression.getExpression().toString());
+        buffer.append("\n");
 
         writer.write(buffer.toString());
     }
@@ -63,7 +62,7 @@ public class XQuerySerializer {
         Iterator<String> prefixIterator = resolver.iteratePrefixes();
         Set<QName> namespaces = new HashSet<QName>();
 
-        while(prefixIterator.hasNext()) {
+        while (prefixIterator.hasNext()) {
             String localPart = prefixIterator.next();
             String uri = resolver.getURIForPrefix(localPart, false);
 
@@ -120,10 +119,30 @@ public class XQuerySerializer {
 
         // body
         buffer.append("{").append("\n");
-        Expression body = queryFunction.getBody();
-//         CharSequence s = body.evaluateAsString(null);  // TODO: wtf
 
-        buffer.append("\t").append(body).append("\n");
+        Expression body = queryFunction.getBody();
+        if (body instanceof FixedElement) {
+            FixedElement fixedElement = (FixedElement) body;
+            String tagName = fixedElement.getElementName().getDisplayName();
+
+            Expression expression = fixedElement.getContentExpression();
+
+            String content = expression.toString();
+
+            if (expression instanceof SimpleNodeConstructor) {
+                SimpleNodeConstructor nodeConstructor = (SimpleNodeConstructor) expression;
+                content = nodeConstructor.getContentExpression().toString();
+            }
+
+            buffer.append("\t");
+            buffer.append("<" + tagName + ">");
+            buffer.append("{").append(content).append("}");
+            buffer.append("</" + tagName + ">");
+            buffer.append("\n");
+
+        } else {
+            buffer.append("\t").append(body).append("\n");
+        }
         buffer.append("};");
         buffer.append("\n");
 

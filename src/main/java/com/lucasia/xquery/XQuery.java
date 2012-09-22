@@ -2,11 +2,11 @@ package com.lucasia.xquery;
 
 import net.sf.saxon.Configuration;
 import net.sf.saxon.Query;
-import net.sf.saxon.query.*;
+import net.sf.saxon.query.StaticQueryContext;
+import net.sf.saxon.query.XQueryExpression;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Iterator;
 
 /**
  * User: ialucas

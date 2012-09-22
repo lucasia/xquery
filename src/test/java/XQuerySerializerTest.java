@@ -10,19 +10,26 @@ import java.io.*;
 public class XQuerySerializerTest {
 
     @Test
-    @Ignore // TODO: close - but still need to fix the FixedElement issue
     public void testSerialize() throws Exception {
-        // XQueryExpression expression = new XQuery().compileQuery("src/test/xquery/sample/hello-world.xqy");
-        XQueryExpression expression = new XQuery().compileQuery("src/test/xquery/sample/hello-world-flat.xqy");
+        final XQueryExpression expression = new XQuery().compileQuery("src/test/xquery/sample/hello-world.xqy");
 
         StringWriter writer = new StringWriter();
 
         new XQuerySerializer(writer).serialize(expression);
 
-        final String expected = readFile("src/test/xquery/sample/hello-world-flat.xqy");
+        String expectedPath = "src/test/xquery/sample/hello-world-flat.xqy";
+        final String expected = readFile(expectedPath);
 
+        // make sure the flat is what we expect
         Assert.assertEquals(expected, writer.getBuffer().toString());
+
+        // make sure that it can also be executed
+        Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><result><foo>hello world!</foo></result>",
+                new XQuery().execute(expectedPath));
     }
+
+
+
 
     public String readFile(String filePath) throws IOException {
 
