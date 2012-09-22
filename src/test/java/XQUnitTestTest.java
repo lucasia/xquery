@@ -1,8 +1,6 @@
+import com.lucasia.xquery.XQuery;
 import junit.framework.Assert;
 import org.junit.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * User: ialucas
@@ -32,33 +30,11 @@ public class XQUnitTestTest {
 
     public void testXQuery(final String xQueryTestPath) throws Exception {
 
-        String results = execute(xQueryTestPath);
+        String results = new XQuery().execute(xQueryTestPath);
 
         Assert.assertTrue(results.contains("pass")); // ensure at least once success
         Assert.assertFalse(results.contains("fail")); // ensure no failures
     }
-    
 
-    public String execute(String xQueryPath) throws Exception {
-
-        PrintStream origSystemOut = System.out;
-
-        try {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-            System.setOut(new PrintStream(stream));
-
-            net.sf.saxon.Query.main(new String[]{xQueryPath});
-
-            stream.flush();
-
-            return stream.toString();
-
-        } finally {
-            System.setOut(origSystemOut);
-        }
-
-
-    }
 
 }
