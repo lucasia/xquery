@@ -2,6 +2,9 @@ import com.lucasia.xquery.XQuery;
 import junit.framework.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 /**
  * User: ialucas
  * <p/>
@@ -29,9 +32,12 @@ public class XQUnitTestTest {
     }
 
 
-    public void testXQuery(final String xQueryTestPath) throws Exception {
+    public void testXQuery(final String xqFilePath) throws Exception {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-        String results = new XQuery().execute(xQueryTestPath);
+        new XQuery().execute(xqFilePath, new PrintStream(stream));
+
+        final String results = stream.toString();
 
         Assert.assertTrue(results.contains("pass")); // ensure at least once success
         Assert.assertFalse(results.contains("fail")); // ensure no failures

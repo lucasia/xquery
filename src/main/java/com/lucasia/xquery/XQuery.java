@@ -5,7 +5,7 @@ import net.sf.saxon.Query;
 import net.sf.saxon.query.StaticQueryContext;
 import net.sf.saxon.query.XQueryExpression;
 
-import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 /**
@@ -13,25 +13,43 @@ import java.io.PrintStream;
  */
 public class XQuery extends Query {
 
-    public String execute(String xQueryPath) throws Exception {
+    public void execute(final String xqFilePath, final PrintStream outputStream) throws Exception {
 
         final PrintStream origSystemOut = System.out;
 
         try {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            System.setOut(outputStream);
 
-            System.setOut(new PrintStream(stream));
+            doQuery(new String[] {xqFilePath}, "java net.sf.saxon.Query");
 
-            doQuery(new String[]{xQueryPath}, "");
-
-            stream.flush();
-
-            return stream.toString();
+            outputStream.flush();
 
         } finally {
             System.setOut(origSystemOut);
-        }
 
+            outputStream.close();
+        }
+    }
+
+    public void execute(final InputStream inputStream, final PrintStream outputStream) throws Exception {
+        final PrintStream origSystemOut = System.out;
+        final InputStream origSystemIn = System.in;
+
+        try {
+            System.setIn(inputStream);
+            System.setOut(outputStream);
+
+            doQuery(new String [] {"-q:-"}, "java net.sf.saxon.Query");
+
+            outputStream.flush();
+
+        } finally {
+            System.setIn(origSystemIn);
+            System.setOut(origSystemOut);
+
+            inputStream.close();
+            outputStream.close();
+        }
     }
 
 

@@ -16,15 +16,20 @@ public class XQueryFlattenerTest {
 
         new XQueryFlattener(writer).flatten(expression);
 
-        String expectedPath = "src/test/xquery/sample/hello-world-flat.xqy";
-        final String expected = XQueryFlattener.readFile(expectedPath);
+        final String expected = XQueryFlattener.readFile("src/test/xquery/sample/hello-world-flat.xqy");
 
-        // make sure the flat is what we expect
-        Assert.assertEquals(expected, writer.getBuffer().toString());
+        // make sure the flattened version is what we expect
+        final String actual = writer.getBuffer().toString();
+        Assert.assertEquals(expected, actual);
+
+        // check if we can execute the flattened xquery
+        final ByteArrayInputStream inputStream = new ByteArrayInputStream(actual.getBytes());
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        new XQuery().execute(inputStream, new PrintStream(outputStream));
 
         // make sure that it can also be executed
-        Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><result><msg>hello world!</msg></result>",
-                new XQuery().execute(expectedPath));
+        Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><result><msg>hello world!</msg></result>", outputStream.toString());
     }
 
 
