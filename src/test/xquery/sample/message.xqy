@@ -1,9 +1,7 @@
-module namespace msg = "http://lucasia.com/xquery/sample/business-logic";
+module namespace msg = "http://lucasia.com/xquery/message";
 
-declare function local:message($msg as xs:string)
+declare function msg:message($msg as xs:string)
 as item()
 {
-		$msg
+		<foo>$msg</foo>
 };
-
-local:message("hello-world")

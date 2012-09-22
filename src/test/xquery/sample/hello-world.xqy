@@ -1,7 +1,9 @@
-declare function local:message($msg as xs:string)
+import module namespace msg = "http://lucasia.com/xquery/message" at "message.xqy";
+
+declare function local:print($msg as xs:string)
 as item()
 {
-		$msg
+		<result>{msg:message($msg)}</result>
 };
 
-local:message("hello-world")
+local:print("hello world!")
