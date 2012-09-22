@@ -9,7 +9,7 @@ import java.io.*;
 public class XQueryFlattenerTest {
 
     @Test
-    public void testSerialize() throws Exception {
+    public void testFlatten() throws Exception {
         final XQueryExpression expression = new XQuery().compileQuery("src/test/xquery/sample/hello-world.xqy");
 
         StringWriter writer = new StringWriter();

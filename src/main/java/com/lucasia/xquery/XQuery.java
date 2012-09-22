@@ -36,10 +36,7 @@ public class XQuery extends Query {
 
 
     public XQueryExpression compileQuery(String xQueryPath) throws Exception {
-        // execute(xQueryPath); // todo: dependency on execute in compile, investigate and remove
-        // StaticQueryContext staticQueryContext = getConfiguration().getDefaultStaticQueryContext();
-
-        StaticQueryContext staticQueryContext = new Configuration().getDefaultStaticQueryContext();
+        final StaticQueryContext staticQueryContext = new Configuration().getDefaultStaticQueryContext();
 
         XQueryExpression expression = compileQuery(staticQueryContext, xQueryPath, false);
 
