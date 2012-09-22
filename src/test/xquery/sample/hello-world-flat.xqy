@@ -6,11 +6,13 @@ declare namespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
 declare namespace fn = "http://www.w3.org/2005/xpath-functions";
 declare namespace xs = "http://www.w3.org/2001/XMLSchema";
 
+
 declare function msg:message($msg as xs:string)
-as item()
+as element(msg)
 {
-	<foo>{$msg}</foo>
+	<msg>{$msg}</msg>
 };
+
 declare function local:print($msg as xs:string)
 as item()
 {

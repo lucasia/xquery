@@ -1,7 +1,7 @@
 module namespace msg = "http://lucasia.com/xquery/message";
 
 declare function msg:message($msg as xs:string)
-as item()
+as element(msg)
 {
-	<foo>{$msg}</foo>
+	<msg>{$msg}</msg>
 };
