@@ -3,13 +3,13 @@ package com.lucasia.xquery;
 import net.sf.saxon.Query;
 import net.sf.saxon.om.NamespaceResolver;
 import net.sf.saxon.query.QueryModule;
-import net.sf.saxon.query.XQueryExpression;
 import net.sf.saxon.query.XQueryFunction;
 import net.sf.saxon.query.XQueryFunctionLibrary;
 import net.sf.saxon.s9api.*;
 
 import javax.xml.namespace.QName;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;

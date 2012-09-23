@@ -1,7 +1,6 @@
 package com.lucasia.xquery;
 
 import net.sf.saxon.query.QueryModule;
-import net.sf.saxon.query.XQueryExpression;
 import net.sf.saxon.s9api.XQueryExecutable;
 
 import javax.xml.namespace.QName;
@@ -63,7 +62,7 @@ public class XQueryFlattener {
 
         QueryModule topLevelModule = staticContext.getTopLevelModule();
         final String mainModuleSystemId = topLevelModule.getSystemId();
-        assert(topLevelModule.isMainModule());
+        assert (topLevelModule.isMainModule());
 
         final Set<String> moduleSystemIds = XQuery.getModuleSystemIds(staticContext);
         for (String moduleSystemId : moduleSystemIds) {
