@@ -23,12 +23,15 @@ public class XQueryFlattenerTest {
         Assert.assertEquals(expectedContent, actualContent);
 
         // check if we can execute the flattened xquery
-        final ByteArrayInputStream inputStream = new ByteArrayInputStream(actualContent.getBytes());
-        ByteArrayOutputStream actualXQResult = new ByteArrayOutputStream();
-        new XQuery().execute(inputStream, new PrintStream(actualXQResult));
+        String actualXQResult = new XQuery().execute(actualContent);
+
+        final String expected =
+                        "<result>\n" +
+                        "   <msg>hello world!</msg>\n" +
+                        "</result>";
 
         // make sure that it can also be executed
-        Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><result><msg>hello world!</msg></result>", actualXQResult.toString());
+        Assert.assertEquals(expected, actualXQResult);
     }
 
 
@@ -47,12 +50,10 @@ public class XQueryFlattenerTest {
         Assert.assertEquals(expectedContent, actualContent);
 
         // check if we can execute the flattened xquery
-        final ByteArrayInputStream inputStream = new ByteArrayInputStream(actualContent.getBytes());
-        ByteArrayOutputStream actualXQResult = new ByteArrayOutputStream();
-        new XQuery().execute(inputStream, new PrintStream(actualXQResult));
+        String actualXQResult = new XQuery().execute(actualContent);
 
         // make sure that it can also be executed
-        Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?><result>sdrawkcab</result>", actualXQResult.toString());
+        Assert.assertEquals("<result>sdrawkcab</result>", actualXQResult);
 
     }
 

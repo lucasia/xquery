@@ -1,9 +1,7 @@
+import com.lucasia.xquery.XQuery;
 import com.lucasia.xquery.XQueryFileReader;
 import junit.framework.Assert;
-import net.sf.saxon.om.Name11Checker;
-import net.sf.saxon.om.NameChecker;
-import net.sf.saxon.query.QueryReader;
-import net.sf.saxon.trans.XPathException;
+import net.sf.saxon.query.XQueryExpression;
 import org.junit.Test;
 
 import java.io.*;
@@ -29,4 +27,5 @@ public class XQueryFileReaderTest {
             return (pathname.isDirectory() || pathname.getName().contains("test"));
         }
     }
+
 }

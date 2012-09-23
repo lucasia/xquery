@@ -34,6 +34,13 @@ public class XQueryParamTest {
 
 
     @Parameterized.Parameters
+    /**
+     * For example
+     * "src/test/xquery/sample/message-business-logic-test.xqy"
+     * "src/test/xquery/reference/conform-test.xqy"
+     * "src/test/xquery/reference/format-test.xqy"
+     * "src/test/xquery/reference/functional-test.xqy"
+     */
     public static Collection<Object[]> getParameters() throws FileNotFoundException {
         Collection<Object[]> parameters = new ArrayList<Object[]>();
 
@@ -54,11 +61,7 @@ public class XQueryParamTest {
 
     @Test
     public void testXQueryParams() throws Exception {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-        new XQuery().execute(xqFilePath, new PrintStream(stream));
-
-        final String results = stream.toString();
+        final String results = new XQuery().execute(new File(xqFilePath));
 
         Assert.assertTrue(results.contains("pass")); // ensure at least once success
         Assert.assertFalse(results.contains("fail")); // ensure no failures

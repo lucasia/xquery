@@ -4,14 +4,12 @@ import net.sf.saxon.Configuration;
 import net.sf.saxon.Query;
 import net.sf.saxon.om.NamespaceResolver;
 import net.sf.saxon.query.*;
+import net.sf.saxon.s9api.*;
+import net.sf.saxon.trans.XPathException;
 
 import javax.xml.namespace.QName;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 /**
  * User: ialucas
@@ -29,45 +27,35 @@ public class XQuery extends Query {
         }
     }
 
-    public void execute(final String xqFilePath, final PrintStream outputStream) throws Exception {
-        execute(new String[]{xqFilePath}, System.in, outputStream);
-    }
+    private static class XQCompiler extends XQueryCompiler {
 
-    public void execute(final InputStream inputStream, final PrintStream outputStream) throws Exception {
-        execute(new String[]{"-q:-"}, inputStream, outputStream);
-    }
-
-    private void execute(String[] args, final InputStream inputStream, final PrintStream outputStream) throws Exception {
-        final PrintStream origSystemOut = System.out;
-        final InputStream origSystemIn = System.in;
-
-        try {
-            System.setIn(inputStream);
-            System.setOut(outputStream);
-
-            doQuery(args, "java net.sf.saxon.Query");
-
-            outputStream.flush();
-
-        } finally {
-            System.setIn(origSystemIn);
-            System.setOut(origSystemOut);
-
-            inputStream.close();
-            outputStream.close();
+        private XQCompiler() {
+            super(new Processor(false));
         }
     }
 
-    public void runQuery(XQueryExpression exp, final PrintStream outputStream) throws Exception {
-        QueryModule staticContext = exp.getStaticContext();
+    public String execute(final File file) throws Exception {
+        final XQueryExecutable executable = new XQCompiler().compile(file);
 
-        DynamicQueryContext dynamicEnv = new DynamicQueryContext(staticContext.getConfiguration());
+        return execute(executable);
+    }
 
-        super.runQuery(exp, dynamicEnv, outputStream, new Properties());
+    public String execute(final String xquery) throws Exception {
+        final XQueryExecutable executable = new XQCompiler().compile(xquery);
+
+        return execute(executable);
+    }
+
+    private String execute(final XQueryExecutable executable) throws Exception {
+        final XQueryEvaluator evaluator = executable.load();
+
+        final XdmValue value = evaluator.evaluate();
+
+        return value.toString();
     }
 
 
-    public XQueryExpression compileQuery(String xQueryPath) throws Exception {
+    public XQueryExpression compileQuery(String xQueryPath) throws XPathException, IOException {
         final StaticQueryContext staticQueryContext = new Configuration().getDefaultStaticQueryContext();
 
         XQueryExpression expression = compileQuery(staticQueryContext, xQueryPath, false);
