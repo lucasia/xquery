@@ -3,6 +3,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.model.FrameworkMethod;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,11 +15,11 @@ import java.util.Collection;
  * Test to ensure the XQuery unit test works as expected
  */
 @RunWith(value = Parameterized.class)
-public class XQueryParamTest {
+public class XQueryParamTestSuite {
 
     private String xqFilePath;
 
-    public XQueryParamTest(String xqFilePath) {
+    public XQueryParamTestSuite(String xqFilePath) {
         this.xqFilePath = xqFilePath;
     }
 
@@ -33,7 +34,6 @@ public class XQueryParamTest {
 
         return Arrays.asList(data);
     }
-
 
 
     @Test

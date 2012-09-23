@@ -1,5 +1,6 @@
 import com.lucasia.xquery.XQuery;
 import junit.framework.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -10,7 +11,9 @@ import java.io.PrintStream;
  * <p/>
  * Test to ensure the XQuery unit test works as expected
  */
+@Ignore
 public class XQueryTest {
+
     @Test
     public void sampleTestSuite() throws Exception {
         testXQuery("src/test/xquery/sample/message-business-logic-test.xqy");
