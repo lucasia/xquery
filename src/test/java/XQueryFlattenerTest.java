@@ -1,5 +1,5 @@
-import com.lucasia.xquery.XQuery;
-import com.lucasia.xquery.XQueryFlattener;
+import com.lucasia.xquery.*;
+import com.lucasia.xquery.XQueryFileReader;
 import junit.framework.Assert;
 import net.sf.saxon.query.XQueryExpression;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class XQueryFlattenerTest {
         final String actualContent = writer.getBuffer().toString();
 
         // make sure the flattened version is what we expect
-        final String expectedContent = XQueryFlattener.readFile("src/test/xquery/sample/hello-world-flat.xqy");
+        final String expectedContent = new XQueryFileReader().readFile("src/test/xquery/sample/hello-world-flat.xqy");
         Assert.assertEquals(expectedContent, actualContent);
 
         // check if we can execute the flattened xquery
@@ -43,7 +43,7 @@ public class XQueryFlattenerTest {
         final String actualContent = writer.getBuffer().toString();
 
         // make sure the flattened version is what we expect
-        final String expectedContent = XQueryFlattener.readFile("src/test/xquery/sample/reverse-flat.xqy");
+        final String expectedContent = new XQueryFileReader().readFile("src/test/xquery/sample/reverse-flat.xqy");
         Assert.assertEquals(expectedContent, actualContent);
 
         // check if we can execute the flattened xquery
