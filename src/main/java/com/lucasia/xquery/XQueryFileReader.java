@@ -8,6 +8,9 @@ import java.util.List;
  * User: ialucas
  */
 public class XQueryFileReader {
+    public String readFile(final File file) throws IOException {
+        return readFile(file.getPath());
+    }
 
     public String readFile(final String filePath) throws IOException {
         return readFile(filePath, new XQuery.AlwaysTrue<String>());

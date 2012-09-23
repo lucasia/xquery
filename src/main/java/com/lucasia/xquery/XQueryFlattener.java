@@ -2,6 +2,7 @@ package com.lucasia.xquery;
 
 import net.sf.saxon.query.QueryModule;
 import net.sf.saxon.query.XQueryExpression;
+import net.sf.saxon.s9api.XQueryExecutable;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;
@@ -20,10 +21,10 @@ public class XQueryFlattener {
     }
 
 
-    public void flatten(XQueryExpression expression) throws Exception {
+    public void flatten(XQueryExecutable xQueryExecutable) throws IOException {
         final StringBuffer buffer = new StringBuffer();
 
-        final QueryModule staticContext = expression.getStaticContext();
+        final QueryModule staticContext = xQueryExecutable.getUnderlyingCompiledQuery().getStaticContext();
 
         // namespaces at the top
         buffer.append(flattenNamespaces(staticContext));
