@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -28,25 +29,25 @@ public class XQuery extends Query {
         }
     }
 
+    //     protected void runQuery(XQueryExpression exp, DynamicQueryContext dynamicEnv, OutputStream destination, final Properties outputProps)
+    public void runQuery(XQueryExpression exp, final PrintStream outputStream) throws Exception {
+
+        QueryModule staticContext = exp.getStaticContext();
+
+        DynamicQueryContext dynamicEnv = new DynamicQueryContext(staticContext.getConfiguration());
+
+        super.runQuery(exp, dynamicEnv, outputStream, new Properties());
+    }
+
     public void execute(final String xqFilePath, final PrintStream outputStream) throws Exception {
-
-        final PrintStream origSystemOut = System.out;
-
-        try {
-            System.setOut(outputStream);
-
-            doQuery(new String[]{xqFilePath}, "java net.sf.saxon.Query");
-
-            outputStream.flush();
-
-        } finally {
-            System.setOut(origSystemOut);
-
-            outputStream.close();
-        }
+        execute(new String[]{xqFilePath}, System.in, outputStream);
     }
 
     public void execute(final InputStream inputStream, final PrintStream outputStream) throws Exception {
+        execute(new String[]{"-q:-"}, inputStream, outputStream);
+    }
+
+    private void execute(String [] args, final InputStream inputStream, final PrintStream outputStream) throws Exception {
         final PrintStream origSystemOut = System.out;
         final InputStream origSystemIn = System.in;
 
@@ -54,7 +55,7 @@ public class XQuery extends Query {
             System.setIn(inputStream);
             System.setOut(outputStream);
 
-            doQuery(new String[]{"-q:-"}, "java net.sf.saxon.Query");
+            doQuery(args, "java net.sf.saxon.Query");
 
             outputStream.flush();
 

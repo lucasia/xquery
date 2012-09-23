@@ -1,6 +1,7 @@
 import com.lucasia.xquery.XQuery;
 import com.lucasia.xquery.XQueryFileReader;
 import junit.framework.Assert;
+import net.sf.saxon.query.XQueryExpression;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -50,7 +51,7 @@ public class XQueryParamTest {
 
 
     @Test
-    public void testXQuery() throws Exception {
+    public void testXQueryParams() throws Exception {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         new XQuery().execute(xqFilePath, new PrintStream(stream));
