@@ -1,7 +1,6 @@
 import com.lucasia.xquery.XQuery;
 import com.lucasia.xquery.XQueryFileReader;
 import junit.framework.Assert;
-import net.sf.saxon.query.XQueryExpression;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -18,6 +17,9 @@ import java.util.List;
 /**
  * User: ialucas
  * Test to ensure the XQuery unit test works as expected
+ *
+ * TODO: what i'd like to do is display each test method as a separate test
+ * so we can see what is passing and failing
  */
 @RunWith(value = LabelledParameterized.class)
 public class XQueryParamTest {

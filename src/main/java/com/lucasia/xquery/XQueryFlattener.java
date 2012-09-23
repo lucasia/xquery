@@ -60,7 +60,9 @@ public class XQueryFlattener {
 
         final XQueryFileReader fileReader = new XQueryFileReader();
 
-        final String mainModuleSystemId = staticContext.getTopLevelModule().getSystemId();
+        QueryModule topLevelModule = staticContext.getTopLevelModule();
+        final String mainModuleSystemId = topLevelModule.getSystemId();
+        assert(topLevelModule.isMainModule());
 
         final Set<String> moduleSystemIds = XQuery.getModuleSystemIds(staticContext);
         for (String moduleSystemId : moduleSystemIds) {

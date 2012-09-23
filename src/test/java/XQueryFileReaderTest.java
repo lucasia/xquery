@@ -1,10 +1,12 @@
 import com.lucasia.xquery.XQueryFileReader;
 import junit.framework.Assert;
+import net.sf.saxon.om.Name11Checker;
+import net.sf.saxon.om.NameChecker;
+import net.sf.saxon.query.QueryReader;
+import net.sf.saxon.trans.XPathException;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.List;
 
 /**

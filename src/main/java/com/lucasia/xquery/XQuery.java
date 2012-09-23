@@ -2,7 +2,6 @@ package com.lucasia.xquery;
 
 import net.sf.saxon.Configuration;
 import net.sf.saxon.Query;
-import net.sf.saxon.expr.instruct.Executable;
 import net.sf.saxon.om.NamespaceResolver;
 import net.sf.saxon.query.*;
 
@@ -30,16 +29,6 @@ public class XQuery extends Query {
         }
     }
 
-    //     protected void runQuery(XQueryExpression exp, DynamicQueryContext dynamicEnv, OutputStream destination, final Properties outputProps)
-    public void runQuery(XQueryExpression exp, final PrintStream outputStream) throws Exception {
-
-        QueryModule staticContext = exp.getStaticContext();
-
-        DynamicQueryContext dynamicEnv = new DynamicQueryContext(staticContext.getConfiguration());
-
-        super.runQuery(exp, dynamicEnv, outputStream, new Properties());
-    }
-
     public void execute(final String xqFilePath, final PrintStream outputStream) throws Exception {
         execute(new String[]{xqFilePath}, System.in, outputStream);
     }
@@ -48,7 +37,7 @@ public class XQuery extends Query {
         execute(new String[]{"-q:-"}, inputStream, outputStream);
     }
 
-    private void execute(String [] args, final InputStream inputStream, final PrintStream outputStream) throws Exception {
+    private void execute(String[] args, final InputStream inputStream, final PrintStream outputStream) throws Exception {
         final PrintStream origSystemOut = System.out;
         final InputStream origSystemIn = System.in;
 
@@ -67,6 +56,14 @@ public class XQuery extends Query {
             inputStream.close();
             outputStream.close();
         }
+    }
+
+    public void runQuery(XQueryExpression exp, final PrintStream outputStream) throws Exception {
+        QueryModule staticContext = exp.getStaticContext();
+
+        DynamicQueryContext dynamicEnv = new DynamicQueryContext(staticContext.getConfiguration());
+
+        super.runQuery(exp, dynamicEnv, outputStream, new Properties());
     }
 
 
@@ -117,25 +114,5 @@ public class XQuery extends Query {
 
         return systemIds;
     }
-
-    public static Set<String> getLocalFunctionNames(QueryModule staticContext) {
-        Set<String> functionNames = new HashSet<String>();
-
-        XQueryFunctionLibrary localFunctionLibrary = staticContext.getLocalFunctionLibrary();
-        Iterator<XQueryFunction> functionDefinitions = localFunctionLibrary.getFunctionDefinitions();
-        while(functionDefinitions.hasNext()) {
-            XQueryFunction xQueryFunction = functionDefinitions.next();
-
-            String displayName = xQueryFunction.getDisplayName();
-
-            Executable executable = xQueryFunction.getExecutable();
-
-            functionNames.add(displayName);
-        }
-
-        return functionNames;
-    }
-
-
 
 }
