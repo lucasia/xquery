@@ -10,7 +10,7 @@ import java.io.PrintStream;
  * <p/>
  * Test to ensure the XQuery unit test works as expected
  */
-public class XQUnitTestTest {
+public class XQueryTest {
     @Test
     public void sampleTestSuite() throws Exception {
         testXQuery("src/test/xquery/sample/message-business-logic-test.xqy");
