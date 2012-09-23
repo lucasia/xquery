@@ -1,8 +1,8 @@
 package com.lucasia.xquery;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: ialucas
@@ -56,5 +56,22 @@ public class XQueryFileReader {
         fileReader.close();
 
         return buffer.toString();
+    }
+
+    public List<File> recursiveList(File path, FileFilter filter) throws FileNotFoundException {
+        List<File> files = new ArrayList<File>();
+
+        if (!path.exists()) throw new FileNotFoundException("Unable to find file: "  + path);
+
+        if (path.isDirectory()) {
+            for (File file : path.listFiles(filter)) {
+                files.addAll(recursiveList(file, filter));
+            }
+        } else {
+            files.add(path);
+        }
+
+
+        return files;
     }
 }

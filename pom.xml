@@ -35,18 +35,10 @@
             </plugin>
 
 
-            <!-- some issue running specific tests with latest surefire plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <!--
-                <configuration>
-                    <includes>
-                        <include>**/XQTestRunner.java</include>
-                    </includes>
-                </configuration>
-
-                -->
+                <version>2.9</version>  <!-- required to run specific test methods -->
             </plugin>
 
         </plugins>

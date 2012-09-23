@@ -34,19 +34,6 @@ public class XQueryFlattener {
         writeBuffer(buffer);
     }
 
-    private void writeBuffer(StringBuffer buffer) throws IOException {
-        // chunk up the buffer if we have a large module
-        for (int start = 0; start < buffer.length(); start += 1024) {
-
-            int end = start + 1024;
-            if (end > buffer.length()) {
-                end = buffer.length();
-            }
-
-            writer.write(buffer.substring(start, end));
-        }
-    }
-
     private String flattenNamespaces(QueryModule staticContext) {
         StringBuffer buffer = new StringBuffer();
 
@@ -71,7 +58,7 @@ public class XQueryFlattener {
     private String flattenModules(QueryModule staticContext) throws IOException {
         StringBuffer buffer = new StringBuffer();
 
-        XQueryFileReader fileReader = new XQueryFileReader();
+        final XQueryFileReader fileReader = new XQueryFileReader();
 
         final String mainModuleSystemId = staticContext.getTopLevelModule().getSystemId();
 
@@ -89,6 +76,19 @@ public class XQueryFlattener {
         buffer.append(xqFileContents);
 
         return buffer.toString();
+    }
+
+    private void writeBuffer(StringBuffer buffer) throws IOException {
+        // chunk up the buffer if we have a large module
+        for (int start = 0; start < buffer.length(); start += 1024) {
+
+            int end = start + 1024;
+            if (end > buffer.length()) {
+                end = buffer.length();
+            }
+
+            writer.write(buffer.substring(start, end));
+        }
     }
 
 
