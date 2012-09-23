@@ -1,10 +1,18 @@
 import com.lucasia.xquery.XQuery;
 import junit.framework.Assert;
+import net.sf.saxon.expr.Expression;
+import net.sf.saxon.expr.instruct.Executable;
+import net.sf.saxon.functions.FunctionLibrary;
+import net.sf.saxon.query.QueryModule;
 import net.sf.saxon.query.XQueryExpression;
+import net.sf.saxon.query.XQueryFunction;
+import net.sf.saxon.query.XQueryFunctionLibrary;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * User: ialucas
@@ -12,7 +20,7 @@ import java.io.PrintStream;
 public class XQueryFunctionTest {
 
     /**
-     * TODO: what i'd like to do is display each test method as a seperate test
+     * TODO: what i'd like to do is display each test method as a separate test
      * so we can see what is passing and failing
      *
      * @throws Exception
@@ -26,6 +34,14 @@ public class XQueryFunctionTest {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         XQueryExpression expression = xQuery.compileQuery(xqFilePath);
+
+        /*
+        Set<String> localFunctionNames = XQuery.getLocalFunctionNames(expression.getStaticContext());
+
+        for (String localFunctionName : localFunctionNames) {
+            System.out.println("localFunctionName = " + localFunctionName);
+        }
+        */
 
         xQuery.runQuery(expression, new PrintStream(stream));
 

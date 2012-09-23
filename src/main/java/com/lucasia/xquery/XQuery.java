@@ -2,6 +2,7 @@ package com.lucasia.xquery;
 
 import net.sf.saxon.Configuration;
 import net.sf.saxon.Query;
+import net.sf.saxon.expr.instruct.Executable;
 import net.sf.saxon.om.NamespaceResolver;
 import net.sf.saxon.query.*;
 
@@ -77,7 +78,6 @@ public class XQuery extends Query {
         return expression;
     }
 
-
     public static Set<QName> getNamespaces(QueryModule staticContext, Predicate<String> predicate) {
         NamespaceResolver resolver = staticContext.getNamespaceResolver();
 
@@ -117,6 +117,25 @@ public class XQuery extends Query {
 
         return systemIds;
     }
+
+    public static Set<String> getLocalFunctionNames(QueryModule staticContext) {
+        Set<String> functionNames = new HashSet<String>();
+
+        XQueryFunctionLibrary localFunctionLibrary = staticContext.getLocalFunctionLibrary();
+        Iterator<XQueryFunction> functionDefinitions = localFunctionLibrary.getFunctionDefinitions();
+        while(functionDefinitions.hasNext()) {
+            XQueryFunction xQueryFunction = functionDefinitions.next();
+
+            String displayName = xQueryFunction.getDisplayName();
+
+            Executable executable = xQueryFunction.getExecutable();
+
+            functionNames.add(displayName);
+        }
+
+        return functionNames;
+    }
+
 
 
 }
