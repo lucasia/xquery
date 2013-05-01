@@ -6,10 +6,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import uk.ac.lkl.common.util.testing.LabelledParameterized;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
 /**
  * User: ialucas
  * Test to ensure the XQuery unit test works as expected
- *
+ * <p/>
  * TODO: what i'd like to do is display each test method as a separate test
  * so we can see what is passing and failing
  */
@@ -27,7 +25,7 @@ public class XQueryParamTest {
     private String xqFilePath;
     private String label;
 
-    public XQueryParamTest(String label, String xqFilePath) {
+    public XQueryParamTest(final String label, final String xqFilePath) {
         this.label = label;
         this.xqFilePath = xqFilePath;
     }
@@ -46,7 +44,8 @@ public class XQueryParamTest {
 
         XQueryFileReader fileReader = new XQueryFileReader();
 
-        List<File> files = fileReader.recursiveList(XQueryFileReaderTest.TEST_DIR, new XQueryFileReaderTest.XQueryTestFileFilter());
+        List<File> files = fileReader.recursiveList(XQueryFileReaderTest.TEST_DIR,
+                new XQueryFileReaderTest.XQueryTestFileFilter());
 
         for (File file : files) {
             String testPath = file.getAbsolutePath();
@@ -57,6 +56,25 @@ public class XQueryParamTest {
 
         return parameters;
     }
+
+    public static Collection<Object[]> getParameters2() throws FileNotFoundException {
+        Collection<Object[]> parameters = new ArrayList<Object[]>();
+
+        XQueryFileReader fileReader = new XQueryFileReader();
+
+        List<File> files = fileReader.recursiveList(XQueryFileReaderTest.TEST_DIR,
+                new XQueryFileReaderTest.XQueryTestFileFilter());
+
+        for (File file : files) {
+            String testPath = file.getAbsolutePath();
+            String label = file.getName();
+
+            parameters.add(new Object[]{label, testPath});
+        }
+
+        return parameters;
+    }
+
 
 
     @Test

@@ -12,15 +12,17 @@ import java.util.Set;
  * User: ialucas
  */
 public class XQueryFlattener {
+    public static final int BUFF_LEN = 1024;
+
 
     private Writer writer;
 
-    public XQueryFlattener(Writer writer) {
+    public XQueryFlattener(final Writer writer) {
         this.writer = writer;
     }
 
 
-    public void flatten(XQueryExecutable xQueryExecutable) throws IOException {
+    public void flatten(final XQueryExecutable xQueryExecutable) throws IOException {
         final StringBuffer buffer = new StringBuffer();
 
         final QueryModule staticContext = xQueryExecutable.getUnderlyingCompiledQuery().getStaticContext();
@@ -34,12 +36,12 @@ public class XQueryFlattener {
         writeBuffer(buffer);
     }
 
-    private String flattenNamespaces(QueryModule staticContext) {
+    private String flattenNamespaces(final QueryModule staticContext) {
         StringBuffer buffer = new StringBuffer();
 
         XQuery.Predicate<String> excludeReservedPrefices = new XQuery.Predicate<String>() {
             @Override
-            boolean eval(String prefix) {
+            boolean eval(final String prefix) {
                 return !"xml".equals(prefix);
             }
         };
@@ -55,7 +57,7 @@ public class XQueryFlattener {
         return buffer.toString();
     }
 
-    private String flattenModules(QueryModule staticContext) throws IOException {
+    private String flattenModules(final QueryModule staticContext) throws IOException {
         StringBuffer buffer = new StringBuffer();
 
         final XQueryFileReader fileReader = new XQueryFileReader();
@@ -67,7 +69,9 @@ public class XQueryFlattener {
         final Set<String> moduleSystemIds = XQuery.getModuleSystemIds(staticContext);
         for (String moduleSystemId : moduleSystemIds) {
             // skip the main module for now
-            if (moduleSystemId.equals(mainModuleSystemId)) continue;
+            if (moduleSystemId.equals(mainModuleSystemId)) {
+                continue;
+            }
 
             final String xqFileContents = fileReader.readFileExcludeNamespace(moduleSystemId);
             buffer.append(xqFileContents);
@@ -80,11 +84,11 @@ public class XQueryFlattener {
         return buffer.toString();
     }
 
-    private void writeBuffer(StringBuffer buffer) throws IOException {
+    private void writeBuffer(final StringBuffer buffer) throws IOException {
         // chunk up the buffer if we have a large module
-        for (int start = 0; start < buffer.length(); start += 1024) {
+        for (int start = 0; start < buffer.length(); start += BUFF_LEN) {
 
-            int end = start + 1024;
+            int end = start + BUFF_LEN;
             if (end > buffer.length()) {
                 end = buffer.length();
             }

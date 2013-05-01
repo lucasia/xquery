@@ -1,10 +1,10 @@
-import com.lucasia.xquery.XQuery;
 import com.lucasia.xquery.XQueryFileReader;
 import junit.framework.Assert;
-import net.sf.saxon.query.XQueryExpression;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ public class XQueryFileReaderTest {
 
     public static class XQueryTestFileFilter implements FileFilter {
         @Override
-        public boolean accept(File pathname) {
+        public boolean accept(final File pathname) {
             return (pathname.isDirectory() || pathname.getName().contains("test"));
         }
     }

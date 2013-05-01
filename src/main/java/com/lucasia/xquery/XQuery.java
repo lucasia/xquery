@@ -52,7 +52,7 @@ public class XQuery extends Query {
         return value.toString();
     }
 
-    public static Set<QName> getNamespaces(QueryModule staticContext, Predicate<String> predicate) {
+    public static Set<QName> getNamespaces(final QueryModule staticContext, final Predicate<String> predicate) {
         NamespaceResolver resolver = staticContext.getNamespaceResolver();
 
         Iterator<String> prefixIterator = resolver.iteratePrefixes();
@@ -74,7 +74,7 @@ public class XQuery extends Query {
      * return the Unique set of Module  URIs
      * These correspond either to Library or Main Modules
      */
-    public static Set<String> getModuleSystemIds(QueryModule staticContext) {
+    public static Set<String> getModuleSystemIds(final QueryModule staticContext) {
         Set<String> systemIds = new HashSet<String>();
 
         // module content
@@ -98,12 +98,12 @@ public class XQuery extends Query {
 
     public static class AlwaysTrue<T> extends Predicate<T> {
         @Override
-        boolean eval(T t) {
+        boolean eval(final T t) {
             return true;
         }
     }
 
-    private static class XQCompiler extends XQueryCompiler {
+    private static final class XQCompiler extends XQueryCompiler {
         private XQCompiler() {
             super(new Processor(false));
         }

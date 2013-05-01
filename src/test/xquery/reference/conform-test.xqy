@@ -1,8 +1,8 @@
-import module namespace conform = "http://lucasia.com/xquery/reference/conform" at "../../../main/xquery/reference/conform.xqy";
+import module namespace conform = "http://lucasia.com/xquery/reference/conform" at "../../../../src/main/xquery/reference/conform.xqy";
 
-import module namespace xml-factory = "http://lucasia.com/xquery/reference/test/xml-factory" at "xml-factory.xqy";
+import module namespace xml-factory = "http://lucasia.com/xquery/reference/test/xml-factory" at "../../../../src/test/xquery/reference/xml-factory.xqy";
 
-import module namespace xq = "http://marklogic.com/xqunit" at "../lib/xqunit.xqy";
+import module namespace xq = "http://marklogic.com/xqunit" at "../../../../src/test/xquery/lib/xqunit.xqy";
 
 declare function local:test-conform-economic-terms() 
 {

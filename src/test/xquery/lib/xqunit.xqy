@@ -35,7 +35,7 @@ declare function xqunit:assert-schema-valid($name, $node) {
    Intead, use this function to pass it over, while leaving an explicit marker in the code that something is not passing.
    Grep for "assertKnownFailure" to find instances of this. :)
 declare function xqunit:assert-known-failure($name, $actual, $expected) {
-    if (deep-equal($expected, $actual))
+    if (fn:deep-equal($expected, $actual))
     then <fail test="{$name}" condition="Known Failure did not fail!">
              <expected>{$expected}</expected>
              <actual>{$actual}</actual>

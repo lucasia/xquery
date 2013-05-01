@@ -1,12 +1,14 @@
-import com.lucasia.xquery.*;
+import com.lucasia.xquery.XQuery;
 import com.lucasia.xquery.XQueryFileReader;
+import com.lucasia.xquery.XQueryFlattener;
 import junit.framework.Assert;
-import net.sf.saxon.query.XQueryExpression;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.XQueryExecutable;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
 
 public class XQueryFlattenerTest {
 
@@ -17,9 +19,9 @@ public class XQueryFlattenerTest {
         final File expectedFileResult = new File("src/test/xquery/sample/hello-world-flat.xqy");
 
         final String expectedXQResult =
-                        "<result>\n" +
-                        "   <msg>hello world!</msg>\n" +
-                        "</result>";
+                        "<result>\n"
+                        + "   <msg>hello world!</msg>\n"
+                        + "</result>";
 
 
         testFlatten(fileToFlatten, expectedFileResult, expectedXQResult);
@@ -39,7 +41,8 @@ public class XQueryFlattenerTest {
 
     }
 
-    public void testFlatten(File fileToFlatten, File expectedFileResult, String expectedXQueryResult) throws IOException, SaxonApiException {
+    public void testFlatten(final File fileToFlatten, final File expectedFileResult, final String expectedXQueryResult)
+            throws IOException, SaxonApiException {
         final XQueryExecutable xQueryExecutable = new XQuery().compileQuery(fileToFlatten);
 
         StringWriter writer = new StringWriter();

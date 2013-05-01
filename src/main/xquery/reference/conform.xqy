@@ -20,17 +20,17 @@ declare function conform:conform-economic-terms($trade as element(trade-raw))
 as element()*
 {
     (
-        <ticket>{data($trade/ticket)}</ticket>,
-        <party>{data($trade/party)}</party>,
-        <currency>{data($trade/currency)}</currency>,
-        <amount>{data($trade/amount)}</amount>
+        <ticket>{fn:data($trade/ticket)}</ticket>,
+        <party>{fn:data($trade/party)}</party>,
+        <currency>{fn:data($trade/currency)}</currency>,
+        <amount>{fn:data($trade/amount)}</amount>
     )                  
 };
 
 declare function conform:conform-industry($trade as element(trade-raw), $parties as element(party-raw)*) 
 as element()
 {
-    let $industry as xs:string? := ref-data:find-industry(data($trade/party), $parties)
+    let $industry as xs:string? := ref-data:find-industry(fn:data($trade/party), $parties)
     
     return <industry>{$industry}</industry>                 
 };

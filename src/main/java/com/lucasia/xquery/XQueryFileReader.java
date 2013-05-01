@@ -25,23 +25,25 @@ public class XQueryFileReader {
             @Override
             boolean eval(final String line) {
 
-                if (!line.contains("namespace")) return true;
+                if (!line.contains("namespace")) {
+                    return true;
+                }
 
                 String str = line.replace(" ", "");
 
                 // using startsWith in case these words appear in the code elsewhere
                 // e.g. strings, comments, xml tags
-                return !(str.startsWith("modulenamespace") ||
-                        str.startsWith("importmodulenamespace") ||
-                        str.startsWith("declarenamespace"));
+                return !(str.startsWith("modulenamespace")
+                        || str.startsWith("importmodulenamespace")
+                        || str.startsWith("declarenamespace"));
             }
         };
 
         return readFile(filePath, excludeNamespaceLine);
     }
 
-    public String readFile(String filePath, final XQuery.Predicate<String> shouldAppend) throws IOException {
-        filePath = filePath.replace("file:", "");
+    public String readFile(final String fileUrl, final XQuery.Predicate<String> shouldAppend) throws IOException {
+        final String filePath = fileUrl.replace("file:", "");
 
         final FileReader fileReader = new FileReader(filePath);
 
@@ -61,10 +63,12 @@ public class XQueryFileReader {
         return buffer.toString();
     }
 
-    public List<File> recursiveList(File path, FileFilter filter) throws FileNotFoundException {
+    public List<File> recursiveList(final File path, final FileFilter filter) throws FileNotFoundException {
         List<File> files = new ArrayList<File>();
 
-        if (!path.exists()) throw new FileNotFoundException("Unable to find file: "  + path);
+        if (!path.exists()) {
+            throw new FileNotFoundException("Unable to find file: "  + path);
+        }
 
         if (path.isDirectory()) {
             for (File file : path.listFiles(filter)) {
