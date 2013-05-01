@@ -2,56 +2,55 @@ xquery version "1.0-ml";
 
 import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic/admin.xqy";
 
-let $stage := xs:integer(xdmp:get-request-field("stage", "1"))
+(: creates a forest and database and then attaches the two 
+   assumes the default Security and Schemas databases
+:)
+declare function local:create-forest-database-pair($name as xs:string, $dbName as xs:string, $config as element(configuration)) 
+as element(configuration)
+{
+    let $forestName as xs:string := concat($name, "-forest-001")
+
+    let $config as element(configuration) := admin:forest-create($config, $forestName, xdmp:host(), ())    
+	let $config as element(configuration) := admin:database-create($config, $dbName, xdmp:database("Security"), xdmp:database("Schemas"))
+    let $save as empty-sequence() := admin:save-configuration-without-restart($config)
+
+    let $config as element(configuration) := admin:database-attach-forest($config, xdmp:database($dbName), xdmp:forest($forestName))
+    let $save as empty-sequence() := admin:save-configuration-without-restart($config)
+    
+    return $config
+};
+
+declare function local:create-forest-database-pair($name as xs:string, $config as element(configuration)) 
+as element(configuration)
+{
+    local:create-forest-database-pair($name, concat($name, "-db"), $config)    
+};
+
+let $appName as xs:string := "obd-dev07"
+let $appXdbcServerPort as xs:int := 8117
+
+let $appDbName as xs:string := concat($appName, "-db")
+let $moduleName as xs:string := fn:concat($appName, "-module")
+let $moduleDbName as xs:string := fn:concat($moduleName, "-db")
+
+let $appXdbcServerName as xs:string := fn:concat($appName, "-xdbc")
+let $appHttpServerName as xs:string := fn:concat($appName, "-http")
+let $appHttpServerPort as xs:int := $appXdbcServerPort+100
+
 let $config := admin:get-configuration()
 let $defaultGroupId := admin:group-get-id($config, "Default")
 
-let $appName := "obd-dev03"
-
-let $appDbName := fn:concat($appName, "-db")
-let $appForestName := fn:concat($appName, "-forest-001")
-let $appXdbcServerName := fn:concat($appName, "-xdbc")
-let $appXdbcServerPort := 8113
-let $appHttpServerName := fn:concat($appName, "-http")
-let $appHttpServerPort := 8123
-
-let $appModulesDbName := fn:concat($appName,"-module-db")
-let $appModulesForestName := fn:concat($appName,"-module-forest-001")
-
-let $userDbName := fn:concat($appName, "-user-db")
-let $userForestName := fn:concat($appName, "-user-forest-001")
-
-let $sessionDbName := fn:concat($appName, "-session-db")
-let $sessionForestName := fn:concat($appName,"-session-forest-001")
-
-let $securityDbName := "Security" (: won't create this one :)
-let $schemasDbName := "Schemas" (: won't create this one :)
-
 return
-	(: create forests, databases (including Users and Sessions) and app servers :)
-	let $config := admin:forest-create($config, $appForestName, xdmp:host(), ())
-	let $config := admin:forest-create($config, $appModulesForestName, xdmp:host(), ())	
-    let $config := admin:forest-create($config, $userForestName, xdmp:host(), ())
-	let $config := admin:forest-create($config, $sessionForestName, xdmp:host(), ())
-	
-	let $config := admin:database-create($config, $appDbName, xdmp:database($securityDbName), xdmp:database($schemasDbName))
-	let $config := admin:database-create($config, $appModulesDbName, xdmp:database($securityDbName), xdmp:database($schemasDbName))	
-	let $config := admin:database-create($config, $userDbName, xdmp:database($securityDbName), xdmp:database($schemasDbName))
-	let $config := admin:database-create($config, $sessionDbName, xdmp:database($securityDbName), xdmp:database($schemasDbName))
-	let $save := admin:save-configuration-without-restart($config)
-	
-	let $config := admin:database-attach-forest($config, xdmp:database($appDbName), xdmp:forest($appForestName))
-	let $config := admin:database-attach-forest($config, xdmp:database($appModulesDbName), xdmp:forest($appModulesForestName))	
-    let $config := admin:database-attach-forest($config, xdmp:database($userDbName), xdmp:forest($userForestName))
-	let $config := admin:database-attach-forest($config, xdmp:database($sessionDbName), xdmp:forest($sessionForestName))
-	let $save := admin:save-configuration-without-restart($config)
+	let $config as element(configuration) := local:create-forest-database-pair($appName, $appDbName, $config)
+	let $config as element(configuration) := local:create-forest-database-pair($moduleName, $moduleDbName, $config)
+	let $config as element(configuration) := local:create-forest-database-pair(concat($appName, "-user"), $config)
+	let $config as element(configuration) := local:create-forest-database-pair(concat($appName, "-session"), $config)
 
-    (: create app servers :)
-	let $config := admin:http-server-create($config, $defaultGroupId, $appHttpServerName, "/", $appXdbcServerPort, xdmp:database($appModulesDbName), xdmp:database($appDbName))
-	let $config := admin:xdbc-server-create($config, $defaultGroupId, $appXdbcServerName, "/", $appHttpServerPort, xdmp:database($appModulesDbName), xdmp:database($appDbName))
+	let $config as element(configuration) := admin:http-server-create($config, $defaultGroupId, $appHttpServerName, "/", $appXdbcServerPort, xdmp:database($moduleDbName), xdmp:database($appDbName))
+	let $config as element(configuration) := admin:xdbc-server-create($config, $defaultGroupId, $appXdbcServerName, "/", $appHttpServerPort, xdmp:database($moduleDbName), xdmp:database($appDbName))
 
-	let $config := admin:appserver-set-collation($config, admin:appserver-get-id($config, $defaultGroupId, $appHttpServerName), "http://marklogic.com/collation/codepoint")
-	let $config := admin:appserver-set-collation($config, admin:appserver-get-id($config, $defaultGroupId, $appXdbcServerName), "http://marklogic.com/collation/codepoint")
+	let $config as element(configuration) := admin:appserver-set-collation($config, admin:appserver-get-id($config, $defaultGroupId, $appHttpServerName), "http://marklogic.com/collation/codepoint")
+	let $config as element(configuration) := admin:appserver-set-collation($config, admin:appserver-get-id($config, $defaultGroupId, $appXdbcServerName), "http://marklogic.com/collation/codepoint")
 
-	let $save := admin:save-configuration($config)
-	return ()
+	let $save as empty-sequence() := admin:save-configuration($config)
+	return $save
