@@ -10,6 +10,21 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
+                                    <String>src/main/xquery/admin/ml-setup.xqy</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>xquery-saxon</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XQUERY</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
                                     <String>src/test/xquery/tdd/fx-tdd-test.xqy</String>
                                 </field>
                                 <field name="scenarioIds">
@@ -513,6 +528,7 @@
         </options>
     </meta>
     <projectTree name="xquery.xpr">
+        <folder path="../../Library/MarkLogic/Modules/MarkLogic/"/>
         <folder path="."/>
     </projectTree>
 </project>

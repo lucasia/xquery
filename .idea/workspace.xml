@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b67009f5-e0fd-482f-9e87-b2fc6c79a6f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lucasia/xquery/XQuery.java" afterPath="$PROJECT_DIR$/src/main/java/com/lucasia/xquery/XQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lucasia/xquery/XQueryFileReader.java" afterPath="$PROJECT_DIR$/src/main/java/com/lucasia/xquery/XQueryFileReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/XQueryFileReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/XQueryFileReaderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/lucasia/xquery/XQueryFlattener.java" afterPath="$PROJECT_DIR$/src/main/java/com/lucasia/xquery/XQueryFlattener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/XQueryFlattenerTest.java" afterPath="$PROJECT_DIR$/src/test/java/XQueryFlattenerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/XQueryParamTest.java" afterPath="$PROJECT_DIR$/src/test/java/XQueryParamTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/xquery/reference/conform-test.xqy" afterPath="$PROJECT_DIR$/src/test/xquery/reference/conform-test.xqy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/xquery/reference/conform.xqy" afterPath="$PROJECT_DIR$/src/main/xquery/reference/conform.xqy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/xquery/reference/format-test.xqy" afterPath="$PROJECT_DIR$/src/test/xquery/reference/format-test.xqy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/xquery/reference/functional-test.xqy" afterPath="$PROJECT_DIR$/src/test/xquery/reference/functional-test.xqy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/xquery/reference/ref-data.xqy" afterPath="$PROJECT_DIR$/src/main/xquery/reference/ref-data.xqy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xquery.xpr" afterPath="$PROJECT_DIR$/xquery.xpr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/xquery/lib/xqunit.xqy" afterPath="$PROJECT_DIR$/src/test/xquery/lib/xqunit.xqy" />
     </list>
     <ignored path="xquery-app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -140,7 +128,7 @@
       <file leaf-file-name="XQueryParamTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/XQueryParamTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="16" selection-start="2427" selection-end="2427" vertical-scroll-proportion="0.56978965">
+            <state line="58" column="0" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.332696">
               <folding />
             </state>
           </provider>
@@ -150,15 +138,6 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/XQueryTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="11" column="13" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fx-tdd-test.xqy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/xquery/tdd/fx-tdd-test.xqy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="35" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -967,16 +946,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/xquery/tdd/fx-tdd-test.xqy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="35" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/XQueryParamTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="16" selection-start="2427" selection-end="2427" vertical-scroll-proportion="0.56978965">
+        <state line="58" column="0" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.332696">
           <folding />
         </state>
       </provider>
