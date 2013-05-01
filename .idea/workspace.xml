@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b67009f5-e0fd-482f-9e87-b2fc6c79a6f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xquery.xpr" afterPath="$PROJECT_DIR$/xquery.xpr" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/xquery/admin/db-cleanup.xqy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/xquery/admin/db-init.xqy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/xquery/admin/user-add.xqy" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xquery-app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -128,7 +131,7 @@
       <file leaf-file-name="XQueryParamTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/XQueryParamTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="0" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.332696">
+            <state line="77" column="32" selection-start="0" selection-end="2712" vertical-scroll-proportion="0.87762904">
               <folding />
             </state>
           </provider>
@@ -948,7 +951,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/XQueryParamTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.332696">
+        <state line="77" column="32" selection-start="0" selection-end="2712" vertical-scroll-proportion="0.87762904">
           <folding />
         </state>
       </provider>
