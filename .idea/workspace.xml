@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67009f5-e0fd-482f-9e87-b2fc6c79a6f5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ant.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_8_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/xquery/sample/hello-world-flat.xqy" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/xquery/sample/hello-world-flat.xqy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/xquery/sample/reverse-flat.xqy" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/xquery/sample/reverse-flat.xqy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xquery-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/xquery-app.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -454,10 +444,8 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.jsOptions" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.lucasia.xquery" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ianlu\proj\xquery" />
       <recent name="$PROJECT_DIR$/src/test/xquery/reference" />
       <recent name="$PROJECT_DIR$/src/test/xquery/sample" />
       <recent name="$PROJECT_DIR$/src/test/xquery" />
@@ -475,6 +463,9 @@
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+      <recent name="com.lucasia.xquery" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.lucasia.xquery" />
     </key>
   </component>
@@ -655,7 +646,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1348276811378</updated>
-      <workItem from="1621087860761" duration="1445000" />
+      <workItem from="1621087860761" duration="2495000" />
     </task>
     <servers />
   </component>
